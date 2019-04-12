@@ -1,0 +1,11 @@
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\bin\Debug\netcoreapp2.1\Preglednik.deps.json
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\bin\Debug\netcoreapp2.1\Preglednik.runtimeconfig.json
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\bin\Debug\netcoreapp2.1\Preglednik.runtimeconfig.dev.json
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\bin\Debug\netcoreapp2.1\Preglednik.dll
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\bin\Debug\netcoreapp2.1\Preglednik.pdb
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\obj\Debug\netcoreapp2.1\Preglednik.csprojAssemblyReference.cache
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\obj\Debug\netcoreapp2.1\Preglednik.csproj.CoreCompileInputs.cache
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\obj\Debug\netcoreapp2.1\Preglednik.AssemblyInfoInputs.cache
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\obj\Debug\netcoreapp2.1\Preglednik.AssemblyInfo.cs
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\obj\Debug\netcoreapp2.1\Preglednik.dll
+E:\Faks\Operacijski Sustavi\Preglednik Datoteka\Preglednik\Preglednik\obj\Debug\netcoreapp2.1\Preglednik.pdb
