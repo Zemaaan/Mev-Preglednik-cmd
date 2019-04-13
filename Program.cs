@@ -5,7 +5,42 @@ namespace Preglednik
 {
     class Program
     {
-        static void Main(string[] args)
+        static public void ispisi_velicinu(long? kolicina_u_bytovima, string ime_datoteke)
+        {
+            if (kolicina_u_bytovima == null)
+            {
+                Console.WriteLine("+-----------------------------------");
+            }
+
+            if (kolicina_u_bytovima > 1000000000) // jedna miljarda bytova - vise od 1 Gb
+            {
+                Console.WriteLine("|{0, 46} | {1, 47} GB |", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024 * 1024)));
+            }
+
+            else if (kolicina_u_bytovima > 1000000 && kolicina_u_bytovima < 1000000000) // jedan miljun bytova do jedna miljarda bitova - vise od 1 Mb, manje od 1Gb
+            {
+                Console.WriteLine("|{0, 46} | {1, 43} KB | {2, 47} GB", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024)), String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024 * 1024)));
+            }
+
+            else if (kolicina_u_bytovima < 1000000 && kolicina_u_bytovima > 100000) // jedan miljun bytova do jedna miljarda bitova - vise od 0.1 Mb, manje od 1Mb
+            {
+                Console.WriteLine("|{0, 46} | {1, 43} KB | {2, 47} GB", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024)), String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024 * 1024)));
+            }
+
+            else if(kolicina_u_bytovima == 0)
+            {
+                Console.WriteLine("{0} {1}", ime_datoteke, "-");
+            }
+
+            else
+            {
+                Console.WriteLine("|{0, 46} {1, 43}B {2, 47}MB", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima), String.Format("{0:0.00}", (float)kolicina_u_bytovima / 1024));
+            }
+
+
+        }
+
+            static void Main(string[] args)
         {
             string direktorij = null; // opcenito podrucje za postavljanja varijabli zbog try catch blokova
             FileInfo[] datoteke = null;
@@ -41,17 +76,14 @@ namespace Preglednik
                 Main(null);
             }
 
-            Console.WriteLine("+------------------+-------------------+------------+------------------------------------------+");
-            Console.WriteLine("| Velicina       B |                KB |         MB |    Nazivi datoteka                       |");
-            Console.WriteLine("+------------------+-------------------+------------+------------------------------------------+");
+            Console.WriteLine("+-----------------------+----------------+--------------+------------+------------------------------------------+");
+            Console.WriteLine("| Naziv datoteke:       |              B |           KB |         MB |    Nazivi datoteka                       |");
+            Console.WriteLine("+-----------------------+----------------+--------------+------------+------------------------------------------+");
 
             foreach (FileInfo trenutna_datoteka in datoteke)
             {
                 velicina += trenutna_datoteka.Length;
-                Console.WriteLine("|{0, 15} B | {1, 13} KB | {2, 8} MB | {3,40} |",
-                    String.Format("{0:0.00}", (float)trenutna_datoteka.Length / 1024),
-                    String.Format("{0:0.00}", (float)trenutna_datoteka.Length / 1024),
-                    String.Format("{0:0.00}", (float)trenutna_datoteka.Length / (1024 * 1024)), trenutna_datoteka.FullName);
+                ispisi_velicinu(trenutna_datoteka.Length, trenutna_datoteka.FullName);
             }
             Console.WriteLine("+--------------------+-------------+---------+-------------------------------------------------+");
             Console.WriteLine("|{0, 15} B | {1, 13} KB | {2, 4} MB |                                          |",
