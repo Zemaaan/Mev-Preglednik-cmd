@@ -5,38 +5,30 @@ namespace Preglednik
 {
     class Program
     {
-        static public void ispisi_velicinu(long? kolicina_u_bytovima, string ime_datoteke)
+        static public void ispisi_velicinu(float? kolicina_u_bytovima, string ime_datoteke)
         {
+
+            const int gigabyte = 1000000000; // velicina u bitovima
+            const int megabyte = 1000000;
+            const int kilobyte = 1000;
+
             if (kolicina_u_bytovima == null)
             {
                 Console.WriteLine("+-----------------------------------");
             }
-
-            if (kolicina_u_bytovima > 1000000000) // jedna miljarda bytova - vise od 1 Gb
+            else if (kolicina_u_bytovima > gigabyte)
             {
-                Console.WriteLine("|{0, 46} | {1, 47} GB |", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024 * 1024)));
+                Console.WriteLine("| {0,-60} {1,22}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024 * 1024)));
             }
-
-            else if (kolicina_u_bytovima > 1000000 && kolicina_u_bytovima < 1000000000) // jedan miljun bytova do jedna miljarda bitova - vise od 1 Mb, manje od 1Gb
+            else if (kolicina_u_bytovima < gigabyte && kolicina_u_bytovima > megabyte)
             {
-                Console.WriteLine("|{0, 46} | {1, 43} KB | {2, 47} GB", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024)), String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024 * 1024)));
+                Console.WriteLine("| {0,-60} {1,10} {2, 15}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024 * 1024)), String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)));
             }
-
-            else if (kolicina_u_bytovima < 1000000 && kolicina_u_bytovima > 100000) // jedan miljun bytova do jedna miljarda bitova - vise od 0.1 Mb, manje od 1Mb
+            else if (kolicina_u_bytovima < megabyte && kolicina_u_bytovima > kilobyte)
             {
-                Console.WriteLine("|{0, 46} | {1, 43} KB | {2, 47} GB", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024)), String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024 * 1024)));
+                Console.WriteLine("| {0,-60} {1, 42}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)));
             }
-
-            else if(kolicina_u_bytovima == 0)
-            {
-                Console.WriteLine("{0} {1}", ime_datoteke, "-");
-            }
-
-            else
-            {
-                Console.WriteLine("|{0, 46} {1, 43}B {2, 47}MB", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima), String.Format("{0:0.00}", (float)kolicina_u_bytovima / 1024));
-            }
-
+            // Console.WriteLine("|{0, 15} B | {1, 13} KB | {2, 4} MB |     
 
         }
 
@@ -76,9 +68,9 @@ namespace Preglednik
                 Main(null);
             }
 
-            Console.WriteLine("+-----------------------+----------------+--------------+------------+------------------------------------------+");
-            Console.WriteLine("| Naziv datoteke:       |              B |           KB |         MB |    Nazivi datoteka                       |");
-            Console.WriteLine("+-----------------------+----------------+--------------+------------+------------------------------------------+");
+            Console.WriteLine("+------------------------------------------------------------------------+----------------+--------------+------------+-----------------------------+");
+            Console.WriteLine("| Naziv datoteke:                                       |             GB |             MB |           KB |          B |                             |");
+            Console.WriteLine("+------------------------------------------------------------------------+----------------+--------------+------------+-----------------------------+");
 
             foreach (FileInfo trenutna_datoteka in datoteke)
             {
