@@ -5,30 +5,41 @@ namespace Preglednik
 {
     class Program
     {
-        static public void ispisi_velicinu(long? kolicina_u_bytovima, string ime_datoteke)
+        static public void ispisi_velicinu(float? kolicina_u_bytovima, string ime_datoteke)
         {
-            if(kolicina_u_bytovima == null)
+
+            const int gigabyte = 1000000000; // velicina u bitovima
+            const int megabyte = 1000000;
+            const int kilobyte = 1000;
+            const int bajt = 1;
+
+            if (kolicina_u_bytovima == null)
             {
                 Console.WriteLine("+-----------------------------------");
             }
-
-            if(kolicina_u_bytovima > 1000000000) // jedna miljarda bytova - vise od 1 Gb
+            else if (kolicina_u_bytovima > gigabyte)
             {
-                Console.WriteLine("|{0, 46} | {1, 43} GB |", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024 * 1024)));
+                Console.WriteLine("| {0,-60} {1,10}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024 * 1024)));
+            }
+            else if (kolicina_u_bytovima < gigabyte && kolicina_u_bytovima > megabyte)
+            {
+                Console.WriteLine("| {0,-60} {1,22} {2, 14}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)), String.Format("{0:0.00}", kolicina_u_bytovima / 1024 ));
+            }
+            else if (kolicina_u_bytovima < megabyte && kolicina_u_bytovima > kilobyte)
+            {
+                Console.WriteLine("| {0,-60} {1, 37}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / 1024));
+            }
+            else if (kolicina_u_bytovima < kilobyte && kolicina_u_bytovima > bajt)
+            {
+                Console.WriteLine("| {0,-63} {1, 47}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)));
             }
 
-            else if (kolicina_u_bytovima > 1000000 && kolicina_u_bytovima < 1000000000) // jedan miljun bytova do jedna miljarda bitova - vise od 1 Mb, manje od 1Gb
-            {
-                Console.WriteLine("|{0, 46} | {1, 43} KB | {2, 47} GB", ime_datoteke, String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024)), String.Format("{0:0.00}", (float)kolicina_u_bytovima / (1024 * 1024 * 1024)));
-            }
-
+            // Console.WriteLine("|{0, 15} B | {1, 13} KB | {2, 4} MB |     
 
         }
 
-
-        static void Main(string[] args)
+            static void Main(string[] args)
         {
-            
             string direktorij = null; // opcenito podrucje za postavljanja varijabli zbog try catch blokova
             FileInfo[] datoteke = null;
             float velicina = 0;
@@ -36,6 +47,11 @@ namespace Preglednik
             DriveInfo[] popis_diskova = DriveInfo.GetDrives();
             direktorij = popis_diskova[0].ToString(); // odaberemo prvi disk kao default putanju, u slucaju da korisnik pokusa upisati direktorij koji ne postoji
                                                       // obicno C:/ disk, ali ne mora nuzno biti
+
+
+            Console.SetWindowSize(1, 1);
+            Console.SetBufferSize(300, 100);
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
             Console.WriteLine("Upisite direktorij:");
             direktorij = Console.ReadLine();
@@ -58,22 +74,21 @@ namespace Preglednik
                 Main(null);
             }
 
-            Console.WriteLine("+-----------------+------------------+-----------------------------+");
-            Console.WriteLine("| Ime datoteke:   |               MB |                  GB         |");
-            Console.WriteLine("+-----------------+------------------+-----------------------------+");
+            Console.WriteLine("+------------------------------------------------------------------------+-----------+--------------+------------+-----------------------------+");
+            Console.WriteLine("| Naziv datoteke:                                       |             GB |        MB |           KB |          B |                             |");
+            Console.WriteLine("+------------------------------------------------------------------------+-----------+--------------+------------+-----------------------------+");
 
             foreach (FileInfo trenutna_datoteka in datoteke)
             {
                 velicina += trenutna_datoteka.Length;
                 ispisi_velicinu(trenutna_datoteka.Length, trenutna_datoteka.FullName);
-
             }
-            // Console.WriteLine("+--------------------+-------------+---------+-------------------------------------------------+");
-            // Console.WriteLine("|{0, 14} KB | {1, 13} MB | {2, 4} GB |                                          |",
-            //    velicina,
-            //    velicina / 1024,
-            //    velicina / (1024 * 1024 * 100));
-            // Console.WriteLine("+------------------+-------------+---------+---------------------------------------------------+");
+            Console.WriteLine("+--------------------+-------------+---------+-------------------------------------------------+");
+            Console.WriteLine("|{0, 15} B | {1, 13} KB | {2, 4} MB |                                          |",
+                velicina,
+                velicina / 1024,
+                velicina / (1024 * 1024));
+            Console.WriteLine("+------------------+-------------+---------+---------------------------------------------------+");
 
             // Console.SetCursorPosition(1, 3);
             // Console.Write(">");
