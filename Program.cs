@@ -11,25 +11,75 @@ namespace Preglednik
             const int gigabyte = 1000000000; // velicina u bitovima
             const int megabyte = 1000000;
             const int kilobyte = 1000;
+            const int bajt = 1;
 
             if (kolicina_u_bytovima == null)
             {
                 Console.WriteLine("+-----------------------------------");
             }
-            else if (kolicina_u_bytovima > gigabyte)
-            {
-                Console.WriteLine("| {0,-60} {1,22}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024 * 1024)));
-            }
-            else if (kolicina_u_bytovima < gigabyte && kolicina_u_bytovima > megabyte)
-            {
-                Console.WriteLine("| {0,-60} {1,10} {2, 15}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024 * 1024)), String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)));
-            }
-            else if (kolicina_u_bytovima < megabyte && kolicina_u_bytovima > kilobyte)
-            {
-                Console.WriteLine("| {0,-60} {1, 42}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)));
-            }
+            Console.WriteLine("| {0,-60} {1,10} {2,11} {3,14}", ime_datoteke, String.Format("{0:0.0000}", kolicina_u_bytovima / (1024 * 1024 * 1024)), String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)), String.Format("{0:0.00}", kolicina_u_bytovima / 1024 ));
+            
+
+            // else if (kolicina_u_bytovima < gigabyte && kolicina_u_bytovima > megabyte)
+            // {
+            //     Console.WriteLine("| {0,-60} {1,22} {2, 14}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)), String.Format("{0:0.00}", kolicina_u_bytovima / 1024 ));
+            // }
+            // else if (kolicina_u_bytovima < megabyte && kolicina_u_bytovima > kilobyte)
+            // {
+            //     Console.WriteLine("| {0,-60} {1, 37}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / 1024));
+            // }
+            // else if (kolicina_u_bytovima < kilobyte && kolicina_u_bytovima > bajt)
+            // {
+            //     Console.WriteLine("| {0,-63} {1, 47}", ime_datoteke, String.Format("{0:0.00}", kolicina_u_bytovima / (1024 * 1024)));
+            // }
+
             // Console.WriteLine("|{0, 15} B | {1, 13} KB | {2, 4} MB |     
 
+        }
+
+        static public void ispisi_tip_datoteke(string ime_datoteke)
+        {
+            string nastavak_datoteke = Path.GetExtension(ime_datoteke);
+
+            if (nastavak_datoteke == ".txt")
+            {
+                Console.WriteLine("Tekstualna datoteka");
+            }
+
+            else if (nastavak_datoteke == ".docx")
+            {
+                Console.WriteLine("Word dokument");
+            }
+
+            else if (nastavak_datoteke == ".ppt")
+            {
+                Console.WriteLine("Excel prezentacija");
+            }
+
+            else if (nastavak_datoteke == ".ppt")
+            {
+                Console.WriteLine("Excel prezentacija");
+            }
+
+            else if (nastavak_datoteke == ".dll")
+            {
+                Console.WriteLine("Dodatak aplikaciji.");
+            }
+
+            else if (nastavak_datoteke == ".pdf")
+            {
+                Console.WriteLine("PDF datoteka");
+            }
+
+            else if (nastavak_datoteke == ".html")
+            {
+                Console.WriteLine("Web stranica");
+            }
+
+            else if (nastavak_datoteke == ".jpg")
+            {
+                Console.WriteLine("JPG slika");
+            }
         }
 
             static void Main(string[] args)
@@ -68,9 +118,9 @@ namespace Preglednik
                 Main(null);
             }
 
-            Console.WriteLine("+------------------------------------------------------------------------+----------------+--------------+------------+-----------------------------+");
-            Console.WriteLine("| Naziv datoteke:                                       |             GB |             MB |           KB |          B |                             |");
-            Console.WriteLine("+------------------------------------------------------------------------+----------------+--------------+------------+-----------------------------+");
+            Console.WriteLine("+------------------------------------------------------------------------+-----------+--------------+------------+-----------------------------+");
+            Console.WriteLine("| Naziv datoteke:                                       |             GB |        MB |           KB |   Vrsta datoteke:                        |");
+            Console.WriteLine("+------------------------------------------------------------------------+-----------+--------------+------------+-----------------------------+");
 
             foreach (FileInfo trenutna_datoteka in datoteke)
             {
